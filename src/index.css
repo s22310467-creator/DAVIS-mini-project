@@ -36,15 +36,18 @@ body {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 10px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* ========== GLASS CARD ANIMATION CLASSES ========== */
@@ -66,7 +69,7 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
 }
 
 .glass-card:hover {
@@ -95,7 +98,7 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
 }
 
 /* ========== KPI CARD ========== */
@@ -118,7 +121,7 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
 }
 
 .kpi-card::after {
@@ -128,7 +131,7 @@ body {
   right: -50%;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(120,100,255,0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(120, 100, 255, 0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -161,7 +164,7 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
 }
 
 .product-card::after {
@@ -172,7 +175,7 @@ body {
   transform: translateX(-50%);
   width: 80%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
 }
 
 .product-card:hover {
@@ -291,7 +294,7 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0), transparent);
   transition: background 0.28s ease;
 }
 
@@ -308,7 +311,7 @@ body {
 }
 
 .glass-nav-btn:hover::before {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
 }
 
 /* Active / Selected: deeper blur + inner highlight + purple edge glow */
@@ -385,7 +388,7 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0), transparent);
   transition: background 0.28s ease;
 }
 
@@ -484,6 +487,7 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -491,18 +495,37 @@ body {
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(120, 100, 255, 0.05); }
-  50% { box-shadow: 0 0 40px rgba(120, 100, 255, 0.12); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(120, 100, 255, 0.05);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(120, 100, 255, 0.12);
+  }
 }
 
 .animate-in {
@@ -514,9 +537,9 @@ body {
 .recharts-default-tooltip {
   background: rgba(20, 20, 40, 0.9) !important;
   backdrop-filter: blur(20px) !important;
-  border: 1px solid rgba(255,255,255,0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 12px !important;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.4) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4) !important;
 }
 
 /* ========== RESPONSIVE ========== */
@@ -524,9 +547,11 @@ body {
   .kpi-grid-responsive {
     grid-template-columns: repeat(2, 1fr) !important;
   }
+
   .chart-grid-responsive {
     grid-template-columns: 1fr !important;
   }
+
   .product-grid-responsive {
     grid-template-columns: repeat(2, 1fr) !important;
   }
@@ -536,6 +561,7 @@ body {
   .sidebar-responsive {
     display: none !important;
   }
+
   main {
     margin-left: 0 !important;
     width: 100% !important;
@@ -546,9 +572,11 @@ body {
   .kpi-grid-responsive {
     grid-template-columns: 1fr !important;
   }
+
   .product-grid-responsive {
     grid-template-columns: 1fr !important;
   }
+
   .filter-tabs {
     overflow-x: auto;
     flex-wrap: nowrap;
