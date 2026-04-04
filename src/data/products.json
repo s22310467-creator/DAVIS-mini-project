@@ -48,5 +48,255 @@
     "stock": 79,
     "brand": "Nail Couture",
     "status": "In Stock"
+  },
+  {
+    "id": 6,
+    "title": "Wireless Noise-Cancelling Headphones",
+    "category": "electronics",
+    "price": 249.99,
+    "rating": 4.72,
+    "stock": 45,
+    "brand": "SoundWave",
+    "status": "In Stock"
+  },
+  {
+    "id": 7,
+    "title": "4K Ultra HD Smart TV 55\"",
+    "category": "electronics",
+    "price": 699.99,
+    "rating": 4.55,
+    "stock": 12,
+    "brand": "VisionPro",
+    "status": "Low Stock"
+  },
+  {
+    "id": 8,
+    "title": "Portable Bluetooth Speaker",
+    "category": "electronics",
+    "price": 79.99,
+    "rating": 4.21,
+    "stock": 120,
+    "brand": "BassBoost",
+    "status": "In Stock"
+  },
+  {
+    "id": 9,
+    "title": "Mechanical Gaming Keyboard",
+    "category": "electronics",
+    "price": 129.99,
+    "rating": 4.68,
+    "stock": 67,
+    "brand": "KeyForge",
+    "status": "In Stock"
+  },
+  {
+    "id": 10,
+    "title": "Wireless Charging Pad",
+    "category": "electronics",
+    "price": 34.99,
+    "rating": 3.95,
+    "stock": 200,
+    "brand": "ChargeTech",
+    "status": "In Stock"
+  },
+  {
+    "id": 11,
+    "title": "Slim Fit Denim Jacket",
+    "category": "fashion",
+    "price": 89.99,
+    "rating": 4.41,
+    "stock": 52,
+    "brand": "UrbanEdge",
+    "status": "In Stock"
+  },
+  {
+    "id": 12,
+    "title": "Classic Leather Sneakers",
+    "category": "fashion",
+    "price": 119.99,
+    "rating": 4.58,
+    "stock": 38,
+    "brand": "StrideLux",
+    "status": "In Stock"
+  },
+  {
+    "id": 13,
+    "title": "Silk Blend Scarf",
+    "category": "fashion",
+    "price": 49.99,
+    "rating": 4.12,
+    "stock": 15,
+    "brand": "Elegante",
+    "status": "Low Stock"
+  },
+  {
+    "id": 14,
+    "title": "Oversized Cotton Hoodie",
+    "category": "fashion",
+    "price": 59.99,
+    "rating": 4.73,
+    "stock": 88,
+    "brand": "CozyWear",
+    "status": "In Stock"
+  },
+  {
+    "id": 15,
+    "title": "Aviator Sunglasses",
+    "category": "fashion",
+    "price": 149.99,
+    "rating": 4.29,
+    "stock": 9,
+    "brand": "ShadeVault",
+    "status": "Low Stock"
+  },
+  {
+    "id": 16,
+    "title": "Organic Whole Grain Cereal",
+    "category": "groceries",
+    "price": 6.49,
+    "rating": 4.11,
+    "stock": 340,
+    "brand": "NatureHarvest",
+    "status": "In Stock"
+  },
+  {
+    "id": 17,
+    "title": "Cold-Pressed Olive Oil 500ml",
+    "category": "groceries",
+    "price": 12.99,
+    "rating": 4.67,
+    "stock": 175,
+    "brand": "OliveGold",
+    "status": "In Stock"
+  },
+  {
+    "id": 18,
+    "title": "Artisan Sourdough Bread",
+    "category": "groceries",
+    "price": 5.99,
+    "rating": 4.45,
+    "stock": 60,
+    "brand": "BakeCraft",
+    "status": "In Stock"
+  },
+  {
+    "id": 19,
+    "title": "Premium Dark Chocolate Bar",
+    "category": "groceries",
+    "price": 4.99,
+    "rating": 4.82,
+    "stock": 230,
+    "brand": "CocoaLuxe",
+    "status": "In Stock"
+  },
+  {
+    "id": 20,
+    "title": "Sparkling Mineral Water 12-Pack",
+    "category": "groceries",
+    "price": 8.99,
+    "rating": 3.88,
+    "stock": 18,
+    "brand": "AquaPure",
+    "status": "Low Stock"
+  },
+  {
+    "id": 21,
+    "title": "Scandinavian Lounge Chair",
+    "category": "furniture",
+    "price": 449.99,
+    "rating": 4.61,
+    "stock": 8,
+    "brand": "NordicNest",
+    "status": "Low Stock"
+  },
+  {
+    "id": 22,
+    "title": "Adjustable Standing Desk",
+    "category": "furniture",
+    "price": 379.99,
+    "rating": 4.48,
+    "stock": 25,
+    "brand": "ErgoLift",
+    "status": "In Stock"
+  },
+  {
+    "id": 23,
+    "title": "Minimalist Bookshelf",
+    "category": "furniture",
+    "price": 199.99,
+    "rating": 4.35,
+    "stock": 42,
+    "brand": "ShelfCraft",
+    "status": "In Stock"
+  },
+  {
+    "id": 24,
+    "title": "Memory Foam Mattress Queen",
+    "category": "furniture",
+    "price": 599.99,
+    "rating": 4.77,
+    "stock": 14,
+    "brand": "DreamCloud",
+    "status": "Low Stock"
+  },
+  {
+    "id": 25,
+    "title": "Industrial Coffee Table",
+    "category": "furniture",
+    "price": 159.99,
+    "rating": 4.22,
+    "stock": 33,
+    "brand": "IronWood",
+    "status": "In Stock"
+  },
+  {
+    "id": 26,
+    "title": "Carbon Fiber Tennis Racket",
+    "category": "sports",
+    "price": 189.99,
+    "rating": 4.54,
+    "stock": 28,
+    "brand": "AceStrike",
+    "status": "In Stock"
+  },
+  {
+    "id": 27,
+    "title": "Yoga Mat Premium Non-Slip",
+    "category": "sports",
+    "price": 39.99,
+    "rating": 4.63,
+    "stock": 155,
+    "brand": "FlexZone",
+    "status": "In Stock"
+  },
+  {
+    "id": 28,
+    "title": "Adjustable Dumbbell Set 50lb",
+    "category": "sports",
+    "price": 299.99,
+    "rating": 4.71,
+    "stock": 19,
+    "brand": "IronGrip",
+    "status": "Low Stock"
+  },
+  {
+    "id": 29,
+    "title": "Trail Running Shoes",
+    "category": "sports",
+    "price": 134.99,
+    "rating": 4.39,
+    "stock": 65,
+    "brand": "TerraPace",
+    "status": "In Stock"
+  },
+  {
+    "id": 30,
+    "title": "Smart Fitness Tracker Watch",
+    "category": "sports",
+    "price": 99.99,
+    "rating": 4.44,
+    "stock": 82,
+    "brand": "PulseFit",
+    "status": "In Stock"
   }
 ]
