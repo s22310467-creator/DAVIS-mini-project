@@ -1,1 +1,0 @@
-mini project untuk membuat dashboard website yang menampilkan olahan data menggunakan chart chart yang sudadh di pelajari
