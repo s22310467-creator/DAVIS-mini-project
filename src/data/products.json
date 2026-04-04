@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "title": "Essence Mascara Lash Princess",
+    "category": "beauty",
+    "price": 9.99,
+    "rating": 2.56,
+    "stock": 99,
+    "brand": "Essence",
+    "status": "In Stock"
+  },
+  {
+    "id": 2,
+    "title": "Eyeshadow Palette with Mirror",
+    "category": "beauty",
+    "price": 19.99,
+    "rating": 2.86,
+    "stock": 34,
+    "brand": "Glamour Beauty",
+    "status": "In Stock"
+  },
+  {
+    "id": 3,
+    "title": "Powder Canister",
+    "category": "beauty",
+    "price": 14.99,
+    "rating": 4.64,
+    "stock": 89,
+    "brand": "Velvet Touch",
+    "status": "In Stock"
+  },
+  {
+    "id": 4,
+    "title": "Red Lipstick",
+    "category": "beauty",
+    "price": 12.99,
+    "rating": 4.36,
+    "stock": 91,
+    "brand": "Chic Cosmetics",
+    "status": "In Stock"
+  },
+  {
+    "id": 5,
+    "title": "Red Nail Polish",
+    "category": "beauty",
+    "price": 8.99,
+    "rating": 4.32,
+    "stock": 79,
+    "brand": "Nail Couture",
+    "status": "In Stock"
+  }
+]
