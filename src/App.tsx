@@ -581,7 +581,8 @@ const App = () => {
 
           {/* ─── FOOTER ──────────────────────────────── */}
           <footer className="footer">
-            <span>Nebula Inventory Dashboard</span>
+            <span>Nebula Inventory Dashboard.</span>
+            <span>Made by Vallerian & Marshanda</span>
             <span className="footer-dot">·</span>
             <span>{productData.length} total products</span>
             <span className="footer-dot">·</span>
