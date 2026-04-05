@@ -166,7 +166,7 @@ const App = () => {
           <div>
             <div style={styles.logo}>
               <Diamond size={20} style={{ color: '#7B61FF' }} />
-              Inventory HnM
+              NEBULA
             </div>
             <p style={styles.logoSub}>Analytics Dashboard</p>
 
@@ -571,7 +571,7 @@ const App = () => {
 
           {/* ─── FOOTER ──────────────────────────────── */}
           <footer style={styles.footer}>
-            <span>Inventory HnM Dashboard</span>
+            <span>NEBULA Inventory Dashboard</span>
             <span style={{ color: 'rgba(255,255,255,0.15)' }}>·</span>
             <span>{productData.length} total products</span>
             <span style={{ color: 'rgba(255,255,255,0.15)' }}>·</span>
