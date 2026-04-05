@@ -67,6 +67,16 @@ const generateColor = (index: number) => {
   return CHART_COLORS[index % CHART_COLORS.length];
 };
 
+// ─── Tooltip style (must remain inline for recharts) ───────
+const tooltipStyle: React.CSSProperties = {
+  borderRadius: '14px',
+  border: '1px solid rgba(255,255,255,0.08)',
+  boxShadow: '0 16px 48px rgba(0,0,0,0.4)',
+  backgroundColor: 'rgba(20, 20, 40, 0.92)',
+  backdropFilter: 'blur(20px)',
+  padding: '12px 16px',
+};
+
 // ─── Sort options ──────────────────────────────────────────
 type SortKey = 'default' | 'price-asc' | 'price-desc' | 'rating-desc' | 'stock-desc' | 'stock-asc';
 
@@ -154,35 +164,35 @@ const App = () => {
     stock < 20 ? 'status-low' : stock < 50 ? 'status-medium' : 'status-healthy';
 
   return (
-    <div style={styles.page}>
+    <div className="page">
       {/* ─── Background Decorations ──────────────────── */}
-      <div style={styles.bgOrb1} />
-      <div style={styles.bgOrb2} />
-      <div style={styles.bgOrb3} />
+      <div className="bg-orb-1" />
+      <div className="bg-orb-2" />
+      <div className="bg-orb-3" />
 
-      <div style={styles.layout} className="layout-responsive">
+      <div className="layout layout-responsive">
         {/* ─── SIDEBAR ───────────────────────────────── */}
-        <aside style={styles.sidebar} className="sidebar-responsive">
+        <aside className="sidebar sidebar-responsive">
           <div>
-            <div style={styles.logo}>
+            <div className="logo">
               <Diamond size={20} style={{ color: '#7B61FF' }} />
               NEBULA
             </div>
-            <p style={styles.logoSub}>Analytics Dashboard</p>
+            <p className="logo-sub">Analytics Dashboard</p>
 
-            <div style={styles.sidebarSection}>
-              <div style={styles.sidebarTitle}>Categories</div>
-              <div style={styles.categoryList}>
+            <div className="sidebar-section">
+              <div className="sidebar-title">Categories</div>
+              <div className="category-list">
                 {categories.map((cat) => (
                   <button
                     key={cat}
                     onClick={() => toggleCategory(cat)}
                     className={`glass-nav-btn ${isCategoryActive(cat) ? 'active' : ''}`}
                   >
-                    <span style={{ display: 'flex', alignItems: 'center', opacity: 0.7 }}>
+                    <span className="nav-icon-wrap">
                       {categoryIconMap[cat] || <FolderOpen size={16} />}
                     </span>
-                    <span style={{ textTransform: 'capitalize' }}>{cat}</span>
+                    <span className="nav-label">{cat}</span>
                     {isCategoryActive(cat) && <span className="glass-nav-dot" />}
                   </button>
                 ))}
@@ -190,32 +200,32 @@ const App = () => {
             </div>
           </div>
 
-          <div className="glass-card-static" style={styles.sideStats}>
-            <div style={styles.sideStatsTitle}>Active Filters</div>
-            <div style={styles.sideStatsValue}>
+          <div className="glass-card-static side-stats">
+            <div className="side-stats-title">Active Filters</div>
+            <div className="side-stats-value">
               {isAllSelected ? 'All' : Array.from(selectedCategories).join(', ')}
             </div>
-            <div style={styles.sideStatsSub}>
+            <div className="side-stats-sub">
               {totalProducts} product{totalProducts !== 1 ? 's' : ''} · {lowStockItems} low stock
             </div>
           </div>
         </aside>
 
         {/* ─── MAIN CONTENT ──────────────────────────── */}
-        <main style={styles.main}>
+        <main className="main-content">
           {/* ─── HEADER ──────────────────────────────── */}
-          <section style={styles.header}>
+          <section className="header">
             <div>
-              <h1 style={styles.pageTitle}>Inventory Dashboard</h1>
-              <p style={styles.pageSubtitle}>
+              <h1 className="page-title">Inventory Dashboard</h1>
+              <p className="page-subtitle">
                 Track stock, categories, prices, and inventory performance at a glance.
               </p>
             </div>
-            <div style={styles.headerControls}>
-              <div style={styles.searchWrapper}>
+            <div className="header-controls">
+              <div className="search-wrapper">
                 <Search
                   size={18}
-                  style={styles.searchIcon}
+                  className="search-icon"
                   strokeWidth={2}
                   color="rgba(255,255,255,0.35)"
                 />
@@ -243,7 +253,7 @@ const App = () => {
           </section>
 
           {/* ─── CATEGORY TABS ───────────────────────── */}
-          <section style={{ marginBottom: '32px' }}>
+          <section className="filter-tabs-section">
             <div className="filter-tabs">
               {categories.map((cat) => (
                 <button
@@ -251,7 +261,7 @@ const App = () => {
                   className={`filter-tab ${isCategoryActive(cat) ? 'active' : ''}`}
                   onClick={() => toggleCategory(cat)}
                 >
-                  <span style={{ display: 'inline-flex', alignItems: 'center', marginRight: '6px', verticalAlign: 'middle' }}>
+                  <span className="filter-tab-icon">
                     {getCategoryIcon(cat, 14)}
                   </span>
                   {cat}
@@ -261,7 +271,7 @@ const App = () => {
           </section>
 
           {/* ─── KPI CARDS ───────────────────────────── */}
-          <section style={styles.kpiGrid} className="kpi-grid-responsive">
+          <section className="kpi-grid kpi-grid-responsive">
             {[
               { icon: <Package size={20} strokeWidth={1.5} />, label: 'Total Products', value: totalProducts.toString(), color: '#7B61FF', sub: 'In current view' },
               { icon: <BarChart3 size={20} strokeWidth={1.5} />, label: 'Total Stock', value: totalStock.toLocaleString(), color: '#60A5FA', sub: 'Available units' },
@@ -273,20 +283,20 @@ const App = () => {
                 className="kpi-card animate-in"
                 style={{ animationDelay: `${i * 80}ms` }}
               >
-                <div style={{ ...styles.kpiIcon, color: kpi.color }}>{kpi.icon}</div>
-                <div style={styles.kpiLabel}>{kpi.label}</div>
-                <div style={{ ...styles.kpiValue, color: kpi.color }}>{kpi.value}</div>
-                <div style={styles.kpiSub}>{kpi.sub}</div>
+                <div className="kpi-icon" style={{ color: kpi.color }}>{kpi.icon}</div>
+                <div className="kpi-label">{kpi.label}</div>
+                <div className="kpi-value" style={{ color: kpi.color }}>{kpi.value}</div>
+                <div className="kpi-sub">{kpi.sub}</div>
               </div>
             ))}
           </section>
 
           {/* ─── CHARTS ROW ──────────────────────────── */}
-          <section style={styles.chartsGrid} className="chart-grid-responsive">
-            <div className="glass-card-static" style={{ padding: '28px' }}>
-              <div style={styles.cardHeader}>
-                <h3 style={styles.cardTitle}>Top Stock Products</h3>
-                <span style={styles.cardBadge}>Top 8</span>
+          <section className="charts-grid chart-grid-responsive">
+            <div className="glass-card-static chart-panel">
+              <div className="card-header">
+                <h3 className="card-title">Top Stock Products</h3>
+                <span className="card-badge">Top 8</span>
               </div>
               <ResponsiveContainer width="100%" height={320}>
                 <BarChart data={stockData}>
@@ -307,7 +317,7 @@ const App = () => {
                     tickLine={false}
                   />
                   <Tooltip
-                    contentStyle={styles.tooltip}
+                    contentStyle={tooltipStyle}
                     labelStyle={{ color: '#fff', fontWeight: 600 }}
                     itemStyle={{ color: '#B3A1FF' }}
                   />
@@ -322,10 +332,10 @@ const App = () => {
               </ResponsiveContainer>
             </div>
 
-            <div className="glass-card-static" style={{ padding: '28px' }}>
-              <div style={styles.cardHeader}>
-                <h3 style={styles.cardTitle}>Category Split</h3>
-                <span style={styles.cardBadge}>Live</span>
+            <div className="glass-card-static chart-panel">
+              <div className="card-header">
+                <h3 className="card-title">Category Split</h3>
+                <span className="card-badge">Live</span>
               </div>
               <ResponsiveContainer width="100%" height={220}>
                 <PieChart>
@@ -342,17 +352,17 @@ const App = () => {
                     ))}
                   </Pie>
                   <Tooltip
-                    contentStyle={styles.tooltip}
+                    contentStyle={tooltipStyle}
                     itemStyle={{ color: '#B3A1FF' }}
                   />
                 </PieChart>
               </ResponsiveContainer>
-              <div style={styles.legendWrap}>
+              <div className="legend-wrap">
                 {pieData.map((item, index) => (
-                  <div key={item.name} style={styles.legendItem}>
-                    <span style={{ ...styles.legendDot, backgroundColor: generateColor(index) }} />
-                    <span style={styles.legendText}>{item.name}</span>
-                    <span style={styles.legendCount}>{item.value}</span>
+                  <div key={item.name} className="legend-item">
+                    <span className="legend-dot" style={{ backgroundColor: generateColor(index) }} />
+                    <span className="legend-text">{item.name}</span>
+                    <span className="legend-count">{item.value}</span>
                   </div>
                 ))}
               </div>
@@ -360,11 +370,11 @@ const App = () => {
           </section>
 
           {/* ─── CHARTS ROW 2 ────────────────────────── */}
-          <section style={styles.chartsGrid2} className="chart-grid-responsive">
-            <div className="glass-card-static" style={{ padding: '28px' }}>
-              <div style={styles.cardHeader}>
-                <h3 style={styles.cardTitle}>Price Trend</h3>
-                <span style={styles.cardBadge}>Top 8</span>
+          <section className="charts-grid-2 chart-grid-responsive">
+            <div className="glass-card-static chart-panel">
+              <div className="card-header">
+                <h3 className="card-title">Price Trend</h3>
+                <span className="card-badge">Top 8</span>
               </div>
               <ResponsiveContainer width="100%" height={280}>
                 <AreaChart data={priceData}>
@@ -391,7 +401,7 @@ const App = () => {
                     tickLine={false}
                   />
                   <Tooltip
-                    contentStyle={styles.tooltip}
+                    contentStyle={tooltipStyle}
                     labelStyle={{ color: '#fff', fontWeight: 600 }}
                     itemStyle={{ color: '#6EE7B7' }}
                   />
@@ -406,25 +416,25 @@ const App = () => {
               </ResponsiveContainer>
             </div>
 
-            <div className="glass-card-static" style={{ padding: '28px' }}>
-              <div style={styles.cardHeader}>
-                <h3 style={styles.cardTitle}>Quick Insights</h3>
-                <span style={styles.cardBadge}>Summary</span>
+            <div className="glass-card-static chart-panel">
+              <div className="card-header">
+                <h3 className="card-title">Quick Insights</h3>
+                <span className="card-badge">Summary</span>
               </div>
-              <div style={styles.insightList}>
+              <div className="insight-list">
                 {[
                   { icon: <DollarSign size={18} />, title: 'Most expensive', desc: `${priceData[0]?.title || '-'} — $${priceData[0]?.price || 0}`, bg: 'rgba(123,97,255,0.1)', iconColor: '#B3A1FF' },
                   { icon: <Package size={18} />, title: 'Highest stock', desc: `${stockData[0]?.title || '-'} — ${stockData[0]?.stock || 0} units`, bg: 'rgba(52,211,153,0.1)', iconColor: '#6EE7B7' },
                   { icon: <Star size={18} />, title: 'Average rating', desc: `${avgRating} out of 5 stars`, bg: 'rgba(251,191,36,0.1)', iconColor: '#FCD34D' },
                   { icon: <AlertTriangle size={18} />, title: 'Low stock alert', desc: `${lowStockItems} product${lowStockItems !== 1 ? 's' : ''} below 20 units`, bg: 'rgba(239,68,68,0.1)', iconColor: '#FCA5A5' },
                 ].map((insight) => (
-                  <div key={insight.title} style={styles.insightItem}>
-                    <div style={{ ...styles.insightIcon, background: insight.bg, color: insight.iconColor }}>
+                  <div key={insight.title} className="insight-item">
+                    <div className="insight-icon" style={{ background: insight.bg, color: insight.iconColor }}>
                       {insight.icon}
                     </div>
-                    <div style={{ flex: 1 }}>
-                      <div style={styles.insightTitle}>{insight.title}</div>
-                      <div style={styles.insightDesc}>{insight.desc}</div>
+                    <div className="insight-body">
+                      <div className="insight-title">{insight.title}</div>
+                      <div className="insight-desc">{insight.desc}</div>
                     </div>
                   </div>
                 ))}
@@ -433,24 +443,24 @@ const App = () => {
           </section>
 
           {/* ─── PRODUCT GRID ────────────────────────── */}
-          <section style={{ marginBottom: '40px' }}>
-            <div style={styles.sectionHeader}>
-              <h2 style={styles.sectionTitle}>Product Catalog</h2>
-              <span style={styles.sectionCount}>{filteredProducts.length} items</span>
+          <section className="product-section">
+            <div className="section-header">
+              <h2 className="section-title">Product Catalog</h2>
+              <span className="section-count">{filteredProducts.length} items</span>
             </div>
 
             {filteredProducts.length === 0 ? (
-              <div className="glass-card-static" style={{ padding: '60px', textAlign: 'center' }}>
-                <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'center' }}>
+              <div className="glass-card-static empty-state">
+                <div className="empty-state-icon">
                   <Search size={48} strokeWidth={1} color="rgba(255,255,255,0.2)" />
                 </div>
-                <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '16px' }}>No products found</div>
-                <div style={{ color: 'rgba(255,255,255,0.25)', fontSize: '13px', marginTop: '8px' }}>
+                <div className="empty-state-title">No products found</div>
+                <div className="empty-state-desc">
                   Try adjusting your search or filter
                 </div>
               </div>
             ) : (
-              <div style={styles.productGrid} className="product-grid-responsive">
+              <div className="product-grid product-grid-responsive">
                 {filteredProducts.map((item, i) => (
                   <div
                     key={item.id}
@@ -460,9 +470,9 @@ const App = () => {
                     <div className="product-card-glow" />
 
                     {/* Card header */}
-                    <div style={styles.pcHeader}>
-                      <span style={styles.pcCategory}>
-                        <span style={{ display: 'inline-flex', alignItems: 'center', marginRight: '5px', verticalAlign: 'middle' }}>
+                    <div className="pc-header">
+                      <span className="pc-category">
+                        <span className="pc-category-icon">
                           {getCategoryIcon(item.category, 13)}
                         </span>
                         {item.category}
@@ -471,15 +481,15 @@ const App = () => {
                     </div>
 
                     {/* Product title */}
-                    <h3 style={styles.pcTitle}>{item.title}</h3>
-                    <p style={styles.pcBrand}>{item.brand}</p>
+                    <h3 className="pc-title">{item.title}</h3>
+                    <p className="pc-brand">{item.brand}</p>
 
                     {/* Price + Rating */}
-                    <div style={styles.pcMeta}>
-                      <div style={styles.pcPrice}>${item.price.toFixed(2)}</div>
+                    <div className="pc-meta">
+                      <div className="pc-price">${item.price.toFixed(2)}</div>
                       <div className="rating-display">
                         <Star size={13} fill="#FBBF24" color="#FBBF24" />
-                        <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '13px' }}>{item.rating.toFixed(1)}</span>
+                        <span className="pc-rating-value">{item.rating.toFixed(1)}</span>
                         <div className="rating-bar-bg">
                           <div className="rating-bar-fill" style={{ width: `${(item.rating / 5) * 100}%` }} />
                         </div>
@@ -487,14 +497,14 @@ const App = () => {
                     </div>
 
                     {/* Stock bar */}
-                    <div style={styles.pcStockRow}>
-                      <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '12px' }}>Stock</span>
-                      <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '12px', fontWeight: 600 }}>{item.stock} units</span>
+                    <div className="pc-stock-row">
+                      <span className="pc-stock-label">Stock</span>
+                      <span className="pc-stock-value">{item.stock} units</span>
                     </div>
-                    <div style={styles.pcStockBarBg}>
+                    <div className="pc-stock-bar-bg">
                       <div
+                        className="pc-stock-bar-fill"
                         style={{
-                          ...styles.pcStockBarFill,
                           width: `${Math.min((item.stock / 200) * 100, 100)}%`,
                           background: item.stock < 20
                             ? 'linear-gradient(90deg, #EF4444, #F87171)'
@@ -511,20 +521,20 @@ const App = () => {
           </section>
 
           {/* ─── TABLE ───────────────────────────────── */}
-          <section className="glass-card-static" style={{ padding: '28px', marginBottom: '40px' }}>
-            <div style={styles.cardHeader}>
-              <h3 style={styles.cardTitle}>Inventory Table</h3>
-              <span style={styles.cardBadge}>
+          <section className="glass-card-static table-section">
+            <div className="card-header">
+              <h3 className="card-title">Inventory Table</h3>
+              <span className="card-badge">
                 {filteredProducts.length} items
               </span>
             </div>
 
-            <div style={styles.tableWrapper}>
-              <table style={styles.table}>
+            <div className="table-wrapper">
+              <table className="inventory-table">
                 <thead>
                   <tr>
                     {['Product', 'Category', 'Brand', 'Price', 'Rating', 'Stock', 'Status'].map((h) => (
-                      <th key={h} style={styles.th}>{h}</th>
+                      <th key={h}>{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -532,33 +542,33 @@ const App = () => {
                   {filteredProducts.slice(0, 15).map((item) => {
                     const status = getStockStatus(item.stock);
                     return (
-                      <tr key={item.id} style={styles.tableRow}>
-                        <td style={styles.td}>
-                          <div style={styles.productInfo}>
-                            <div style={styles.productIcon}>
+                      <tr key={item.id}>
+                        <td>
+                          <div className="product-info">
+                            <div className="product-icon">
                               {getCategoryIcon(item.category, 18)}
                             </div>
                             <div>
-                              <div style={styles.productTitle}>{item.title}</div>
-                              <div style={styles.productId}>ID: {item.id}</div>
+                              <div className="product-title">{item.title}</div>
+                              <div className="product-id">ID: {item.id}</div>
                             </div>
                           </div>
                         </td>
-                        <td style={styles.td}>
-                          <span style={styles.categoryBadge}>{item.category}</span>
+                        <td>
+                          <span className="category-badge">{item.category}</span>
                         </td>
-                        <td style={styles.td}>{item.brand}</td>
-                        <td style={{ ...styles.td, fontWeight: 600, color: '#34D399' }}>
+                        <td>{item.brand}</td>
+                        <td className="td-price">
                           ${item.price.toFixed(2)}
                         </td>
-                        <td style={styles.td}>
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                        <td>
+                          <span className="rating-inline">
                             <Star size={13} fill="#FBBF24" color="#FBBF24" />
                             {item.rating.toFixed(1)}
                           </span>
                         </td>
-                        <td style={styles.td}>{item.stock}</td>
-                        <td style={styles.td}>
+                        <td>{item.stock}</td>
+                        <td>
                           <span className={getStatusClass(item.stock)}>{status}</span>
                         </td>
                       </tr>
@@ -570,11 +580,12 @@ const App = () => {
           </section>
 
           {/* ─── FOOTER ──────────────────────────────── */}
-          <footer style={styles.footer}>
-            <span>NEBULA Inventory Dashboard</span>
-            <span style={{ color: 'rgba(255,255,255,0.15)' }}>·</span>
+          <footer className="footer">
+            <span>Nebula Inventory Dashboard.</span>
+            <span>Made by Vallerian & Marshanda</span>
+            <span className="footer-dot">·</span>
             <span>{productData.length} total products</span>
-            <span style={{ color: 'rgba(255,255,255,0.15)' }}>·</span>
+            <span className="footer-dot">·</span>
             <span>{categories.length - 1} categories</span>
           </footer>
         </main>
@@ -583,540 +594,5 @@ const App = () => {
   );
 };
 
-// ─── STYLES ─────────────────────────────────────────────────
-const styles: { [key: string]: React.CSSProperties } = {
-  page: {
-    width: '100vw',
-    minHeight: '100vh',
-    background: 'linear-gradient(135deg, #0a0a1a 0%, #0f0f2e 30%, #0a0a1a 60%, #111128 100%)',
-    overflowX: 'hidden',
-    position: 'relative',
-  },
-
-  // Background decoration orbs
-  bgOrb1: {
-    position: 'fixed',
-    top: '-10%',
-    right: '-5%',
-    width: '600px',
-    height: '600px',
-    borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(120,100,255,0.08) 0%, transparent 70%)',
-    pointerEvents: 'none',
-    zIndex: 0,
-  },
-  bgOrb2: {
-    position: 'fixed',
-    bottom: '-15%',
-    left: '-10%',
-    width: '500px',
-    height: '500px',
-    borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(52,211,153,0.06) 0%, transparent 70%)',
-    pointerEvents: 'none',
-    zIndex: 0,
-  },
-  bgOrb3: {
-    position: 'fixed',
-    top: '40%',
-    left: '30%',
-    width: '400px',
-    height: '400px',
-    borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(96,165,250,0.04) 0%, transparent 70%)',
-    pointerEvents: 'none',
-    zIndex: 0,
-  },
-
-  layout: {
-    minHeight: '100vh',
-    width: '100%',
-    position: 'relative',
-    zIndex: 1,
-  },
-
-  sidebar: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '260px',
-    height: '100vh',
-    background: 'rgba(255, 255, 255, 0.02)',
-    backdropFilter: 'blur(30px)',
-    WebkitBackdropFilter: 'blur(30px)',
-    borderRight: '1px solid rgba(255,255,255,0.04)',
-    padding: '32px 20px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    overflowY: 'auto',
-    zIndex: 10,
-  },
-
-  logo: {
-    fontSize: '22px',
-    fontWeight: 700,
-    marginBottom: '6px',
-    color: '#fff',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px',
-    letterSpacing: '-0.02em',
-  },
-
-  logoSub: {
-    fontSize: '12px',
-    color: 'rgba(255,255,255,0.3)',
-    marginBottom: '40px',
-    letterSpacing: '0.05em',
-    textTransform: 'uppercase',
-  },
-
-  sidebarSection: {
-    marginTop: '8px',
-  },
-
-  sidebarTitle: {
-    fontSize: '11px',
-    color: 'rgba(255,255,255,0.3)',
-    fontWeight: 600,
-    marginBottom: '16px',
-    textTransform: 'uppercase',
-    letterSpacing: '0.12em',
-  },
-
-  categoryList: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '6px',
-  },
-
-  sideStats: {
-    padding: '24px',
-    marginTop: '24px',
-    textAlign: 'center',
-  },
-
-  sideStatsTitle: {
-    color: 'rgba(255,255,255,0.3)',
-    fontSize: '12px',
-    marginBottom: '12px',
-    textTransform: 'uppercase',
-    letterSpacing: '0.08em',
-  },
-
-  sideStatsValue: {
-    fontSize: '18px',
-    fontWeight: 600,
-    marginBottom: '8px',
-    color: '#fff',
-    textTransform: 'capitalize',
-    lineHeight: 1.5,
-    wordBreak: 'break-word',
-  },
-
-  sideStatsSub: {
-    color: 'rgba(255,255,255,0.35)',
-    fontSize: '12px',
-  },
-
-  // ─── Main ─────────────────────────────────
-  main: {
-    padding: '32px 40px',
-    marginLeft: '260px',
-    width: 'calc(100% - 260px)',
-    minWidth: 0,
-  },
-
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: '28px',
-    gap: '24px',
-    flexWrap: 'wrap',
-  },
-
-  pageTitle: {
-    margin: 0,
-    fontSize: '30px',
-    fontWeight: 700,
-    color: '#FFFFFF',
-    letterSpacing: '-0.02em',
-  },
-
-  pageSubtitle: {
-    marginTop: '8px',
-    color: 'rgba(255,255,255,0.35)',
-    fontSize: '14px',
-    fontWeight: 400,
-  },
-
-  headerControls: {
-    display: 'flex',
-    gap: '12px',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-  },
-
-  searchWrapper: {
-    position: 'relative',
-    minWidth: '280px',
-  },
-
-  searchIcon: {
-    position: 'absolute',
-    left: '16px',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    pointerEvents: 'none',
-    zIndex: 2,
-  },
-
-  // ─── KPI Grid ─────────────────────────────
-  kpiGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(4, 1fr)',
-    gap: '20px',
-    marginBottom: '32px',
-  },
-
-  kpiIcon: {
-    marginBottom: '14px',
-    width: '42px',
-    height: '42px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: '12px',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.04)',
-  },
-
-  kpiLabel: {
-    fontSize: '12px',
-    color: 'rgba(255,255,255,0.4)',
-    fontWeight: 500,
-    marginBottom: '6px',
-    textTransform: 'uppercase',
-    letterSpacing: '0.08em',
-  },
-
-  kpiValue: {
-    fontSize: '26px',
-    fontWeight: 700,
-    color: '#FFF',
-    marginBottom: '4px',
-    letterSpacing: '-0.02em',
-  },
-
-  kpiSub: {
-    fontSize: '11px',
-    color: 'rgba(255,255,255,0.25)',
-    fontWeight: 400,
-  },
-
-  // ─── Charts ───────────────────────────────
-  chartsGrid: {
-    display: 'grid',
-    gridTemplateColumns: '1.8fr 1fr',
-    gap: '24px',
-    marginBottom: '24px',
-  },
-
-  chartsGrid2: {
-    display: 'grid',
-    gridTemplateColumns: '1.3fr 1fr',
-    gap: '24px',
-    marginBottom: '32px',
-  },
-
-  cardHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '20px',
-  },
-
-  cardTitle: {
-    margin: 0,
-    fontSize: '16px',
-    fontWeight: 600,
-    color: '#FFFFFF',
-    letterSpacing: '-0.01em',
-  },
-
-  cardBadge: {
-    backgroundColor: 'rgba(120,100,255,0.12)',
-    color: 'rgba(180,160,255,0.9)',
-    padding: '5px 14px',
-    borderRadius: '10px',
-    fontSize: '11px',
-    fontWeight: 600,
-    letterSpacing: '0.02em',
-  },
-
-  tooltip: {
-    borderRadius: '14px',
-    border: '1px solid rgba(255,255,255,0.08)',
-    boxShadow: '0 16px 48px rgba(0,0,0,0.4)',
-    backgroundColor: 'rgba(20, 20, 40, 0.92)',
-    backdropFilter: 'blur(20px)',
-    padding: '12px 16px',
-  },
-
-  // ─── Legend ───────────────────────────────
-  legendWrap: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-    marginTop: '16px',
-  },
-
-  legendItem: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px',
-    padding: '6px 0',
-  },
-
-  legendDot: {
-    width: '8px',
-    height: '8px',
-    borderRadius: '50%',
-    flexShrink: 0,
-  },
-
-  legendText: {
-    fontSize: '13px',
-    color: 'rgba(255,255,255,0.5)',
-    textTransform: 'capitalize',
-    flex: 1,
-  },
-
-  legendCount: {
-    fontSize: '13px',
-    color: 'rgba(255,255,255,0.7)',
-    fontWeight: 600,
-  },
-
-  // ─── Insights ─────────────────────────────
-  insightList: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '12px',
-  },
-
-  insightItem: {
-    display: 'flex',
-    gap: '14px',
-    padding: '14px 16px',
-    borderRadius: '14px',
-    backgroundColor: 'rgba(255,255,255,0.02)',
-    border: '1px solid rgba(255,255,255,0.03)',
-    alignItems: 'center',
-    transition: 'all 0.3s ease',
-  },
-
-  insightIcon: {
-    width: '40px',
-    height: '40px',
-    borderRadius: '12px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexShrink: 0,
-  },
-
-  insightTitle: {
-    fontSize: '13px',
-    fontWeight: 500,
-    marginBottom: '3px',
-    color: 'rgba(255,255,255,0.85)',
-  },
-
-  insightDesc: {
-    fontSize: '12px',
-    color: 'rgba(255,255,255,0.35)',
-  },
-
-  // ─── Product Grid ─────────────────────────
-  sectionHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '24px',
-  },
-
-  sectionTitle: {
-    fontSize: '20px',
-    fontWeight: 600,
-    color: '#fff',
-    letterSpacing: '-0.01em',
-  },
-
-  sectionCount: {
-    fontSize: '13px',
-    color: 'rgba(255,255,255,0.3)',
-    fontWeight: 500,
-  },
-
-  productGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: '20px',
-  },
-
-  pcHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '16px',
-  },
-
-  pcCategory: {
-    fontSize: '12px',
-    color: 'rgba(255,255,255,0.4)',
-    textTransform: 'capitalize',
-    fontWeight: 500,
-    display: 'flex',
-    alignItems: 'center',
-  },
-
-  pcTitle: {
-    fontSize: '16px',
-    fontWeight: 600,
-    color: '#fff',
-    marginBottom: '4px',
-    lineHeight: 1.4,
-    letterSpacing: '-0.01em',
-  },
-
-  pcBrand: {
-    fontSize: '13px',
-    color: 'rgba(255,255,255,0.3)',
-    marginBottom: '20px',
-  },
-
-  pcMeta: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '16px',
-  },
-
-  pcPrice: {
-    fontSize: '22px',
-    fontWeight: 700,
-    color: '#34D399',
-    letterSpacing: '-0.02em',
-  },
-
-  pcStockRow: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '8px',
-  },
-
-  pcStockBarBg: {
-    width: '100%',
-    height: '4px',
-    background: 'rgba(255,255,255,0.05)',
-    borderRadius: '2px',
-    overflow: 'hidden',
-  },
-
-  pcStockBarFill: {
-    height: '100%',
-    borderRadius: '2px',
-    transition: 'width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-  },
-
-  // ─── Table ────────────────────────────────
-  tableWrapper: {
-    overflowX: 'auto',
-  },
-
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse',
-  },
-
-  th: {
-    textAlign: 'left',
-    fontSize: '11px',
-    color: 'rgba(255,255,255,0.3)',
-    padding: '0 16px 16px',
-    fontWeight: 500,
-    textTransform: 'uppercase',
-    letterSpacing: '0.08em',
-    borderBottom: '1px solid rgba(255,255,255,0.04)',
-  },
-
-  tableRow: {
-    transition: 'background-color 0.2s ease',
-  },
-
-  td: {
-    padding: '18px 16px',
-    borderBottom: '1px solid rgba(255,255,255,0.03)',
-    fontSize: '13px',
-    color: 'rgba(255,255,255,0.7)',
-  },
-
-  productInfo: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '14px',
-  },
-
-  productIcon: {
-    width: '40px',
-    height: '40px',
-    borderRadius: '12px',
-    backgroundColor: 'rgba(255,255,255,0.04)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'rgba(255,255,255,0.5)',
-    border: '1px solid rgba(255,255,255,0.04)',
-  },
-
-  productTitle: {
-    fontWeight: 600,
-    color: '#FFF',
-    marginBottom: '3px',
-    fontSize: '14px',
-  },
-
-  productId: {
-    fontSize: '11px',
-    color: 'rgba(255,255,255,0.25)',
-  },
-
-  categoryBadge: {
-    backgroundColor: 'rgba(255,255,255,0.04)',
-    color: 'rgba(255,255,255,0.5)',
-    padding: '5px 12px',
-    borderRadius: '8px',
-    fontSize: '12px',
-    fontWeight: 500,
-    textTransform: 'capitalize',
-  },
-
-  // ─── Footer ───────────────────────────────
-  footer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '12px',
-    padding: '24px 0',
-    color: 'rgba(255,255,255,0.2)',
-    fontSize: '12px',
-    borderTop: '1px solid rgba(255,255,255,0.03)',
-    marginTop: '20px',
-  },
-};
 
 export default App;
